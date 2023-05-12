@@ -37,7 +37,8 @@ jobs:
         if: ${{ github.event.discussion && github.event.comment }}
         id: create-comment-message
         run: |
-          string='💬 New comment on [${{ env.DISCUSSION_TITLE }}](${{ env.COMMENT_URL }}) \nby[@${{ env.USER_NAME }}](${{ env.USER_URL }}) \n\n${{ env.COMMENT_BODY }}"'
+          url="https://ghdwlsgur.github.io/"
+          string='💬 New Comment\n$url[${{ env.DISCUSSION_TITLE }}](${{ env.COMMENT_URL }})\n [@${{ env.USER_NAME }}](${{ env.USER_URL }}): ${{ env.COMMENT_BODY }}"'
           escaped_string=$(echo $string | sed 's/\([.!-]\)/\\\\\1/g')
           echo ${escaped_string}
           echo "MESSAGE_BODY=${escaped_string}" >> $GITHUB_OUTPUT
@@ -55,4 +56,5 @@ jobs:
                -H "Content-Type: application/json" \
                -d '{"chat_id": "${{secrets.TELEGRAM_CHAT_ID}}", "disable_web_page_preview": true, "text": "${{ steps.create-comment-message.outputs.MESSAGE_BODY }}"'
         shell: bash
+
 
