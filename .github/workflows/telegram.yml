@@ -26,7 +26,7 @@ jobs:
           USER_NAME: ${{ github.event.comment.user.login }}
       - name: Send Discussion Create Notification to Telegram
         run: |
-          curl -X POST "https://api.telegram.org/bot${{secrets.TELEGRAM_TOKEN}}/sendmessage" \
+          curl -X POST "https://api.telegram.org/bot${{secrets.TELEGRAM_TOKEN}}/sendmessage?parse_mode=MarkdownV2" \
           -H "Content-Type: application/json" \
           -d '{"chat_id": ${{secrets.TELEGRAM_CHAT_ID}}, "text": "${{ steps.create-message.outputs.MESSAGE_BODY }}", "disable_web_page_preview": "true"}'
         shell: bash
@@ -51,7 +51,7 @@ jobs:
           USER_NAME: ${{ github.event.comment.user.login }}
       - name: Send Discussion Create Notification to Telegram
         run: |
-          curl -X POST "https://api.telegram.org/bot${{secrets.TELEGRAM_TOKEN}}/sendmessage" \
+          curl -X POST "https://api.telegram.org/bot${{secrets.TELEGRAM_TOKEN}}/sendmessage?parse_mode=MarkdownV2" \
           -H "Content-Type: application/json" \
           -d '{"chat_id": ${{secrets.TELEGRAM_CHAT_ID}}, "text": "${{ steps.create-comment-message.outputs.MESSAGE_BODY }}", "disable_web_page_preview": "true"}'
         shell: bash
