@@ -14,10 +14,8 @@ jobs:
         if: ${{ github.event.discussion && !github.event.comment }}
         id: create-message
         run: |
-          string='💬 새로운 댓글이 등록되었습니다.\n[${{ env.DISCUSSION_TITLE }}](${{ env.DISCUSSION_URL }})\n\n\n [@${{ env.USER_NAME }}](${{ env.USER_URL }}): ${{ env.DISCUSSION_BODY }}"'
-          escaped_string=$(echo $string | sed 's/\([.!-]\)/\\\\\1/g')
-          echo ${escaped_string}
-          echo "MESSAGE_BODY=${escaped_string}" >> $GITHUB_OUTPUT
+          string='💬 새로운 댓글이 등록되었습니다.\n[${{ env.DISCUSSION_TITLE }}](${{ env.DISCUSSION_URL }})\n\n\n [@${{ env.USER_NAME }}](${{ env.USER_URL }}): ${{ env.DISCUSSION_BODY }}"'          
+          echo "MESSAGE_BODY=${string}" >> $GITHUB_OUTPUT
         env:
           DISCUSSION_URL: ${{ github.event.discussion.html_url }}
           DISCUSSION_TITLE: ${{ github.event.discussion.title }}
@@ -37,10 +35,8 @@ jobs:
         if: ${{ github.event.discussion && github.event.comment }}
         id: create-comment-message
         run: |
-          string='💬 새로운 댓글이 등록되었습니다.\n[${{ env.DISCUSSION_TITLE }}](${{ env.COMMENT_URL }})\n\n\n [@${{ env.USER_NAME }}](${{ env.USER_URL }}): ${{ env.COMMENT_BODY }}"'
-          escaped_string=$(echo $string | sed 's/\([.!-]\)/\\\\\1/g')
-          echo ${escaped_string}
-          echo "MESSAGE_BODY=${escaped_string}" >> $GITHUB_OUTPUT
+          string='💬 새로운 댓글이 등록되었습니다.\n[${{ env.DISCUSSION_TITLE }}](${{ env.COMMENT_URL }})\n\n\n [@${{ env.USER_NAME }}](${{ env.USER_URL }}): ${{ env.COMMENT_BODY }}"'        
+          echo "MESSAGE_BODY=${string}" >> $GITHUB_OUTPUT
         env:
           DISCUSSION_URL: ${{ github.event.discussion.html_url }}
           DISCUSSION_TITLE: ${{ github.event.discussion.title }}
